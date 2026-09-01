@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odliczanie do 12 listopada 2026</title>
+
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #080808;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.box {
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 15px;
+    min-width: 110px;
+    padding: 20px 15px;
+}
+
+.number {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+#finished {
+    display: none;
+    font-size: 35px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Odliczanie do 12 listopada 2026</h1>
+
+<div class="countdown" id="countdown">
+
+<div class="box">
+<div class="number" id="days">0</div>
+<div class="label">Dni</div>
+</div>
+
+<div class="box">
+<div class="number" id="hours">00</div>
+<div class="label">Godzin</div>
+</div>
+
+<div class="box">
+<div class="number" id="minutes">00</div>
+<div class="label">Minut</div>
+</div>
+
+<div class="box">
+<div class="number" id="seconds">00</div>
+<div class="label">Sekund</div>
+</div>
+
+</div>
+
+<div id="finished">🎉 To już dziś!</div>
+
+</div>
+
+<script>
+
+const targetDate = new Date("2026-11-12T00:00:00");
+
+function updateCountdown() {
+
+    const difference = targetDate - new Date();
+
+    if (difference <= 0) {
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("finished").style.display = "block";
+        return;
+    }
+
+    const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+        (difference / 1000) % 60
+    );
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>
